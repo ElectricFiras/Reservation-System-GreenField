@@ -1,15 +1,50 @@
-<button class="btn btn-warning btn-md" ng-click='initMap()'> <span ></span> Detect your location </button>
-<br>
-<br>
-<div style="height: 50%;" id="map"></div>
-<br>
-<button ng-if='flag' class="btn btn-warning btn-md" ng-click='search()'> <span ></span> search for hospitals </button>
+<span class="" id="first" style="width: 100%; height: 100px;">
+	<center style="float: right; width: 100%; position: absolute; top: 20px" id="fb" >
+		<button  class="alert alert-success" style="margin-top: 50px;" ng-click='initMap()'> 
+			<span class="fa fa-map-marker" aria-hidden="true" ></span> 
+			Detect your location 
+		</button>
+	</center>
+	<center style=" width: 100%;  position: absolute; top: 20px"  id="sb">
+		<button ng-if='flag' class="alert alert-success"  style="margin-top: 50px;" ng-click='search()'> 
+		 	<span class="fa fa-search" aria-hidden="true"></span>
+		 	search for hospitals 
+		</button>
+	</center>
+	<center style=" width: 100%;  position: absolute; top: 20px"  id="sb">
+		<button ng-if='flag' class="alert alert-success"  style="margin-top: 50px;" ng-click='doctorss()'> 
+		 	<span class="fa fa-search" aria-hidden="true"></span>
+		 	search for doctors 
+		</button>
+	</center>
+</span>
 
-<div ng-if='render'>
-	<div class="media well well-fuild col-lg-6 col-lg-offset-3 col-md-6 col-sm-12" ng-repeat="hospital in hospitals">
-	<h1>{{hospital.name}}</h1>
+	<div class="containerM containerMB" >
+		<div style="height: 50%;width: 100%; margin: 20px; float: right;" id="map">
+		</div>
+	</div>
 
-	 <a href={{hospital.photos[0].html_attributions[0].split('"')[1]}}>open location</a>
+
+
+
+<div class="containerM" style="float: left;">
+	<div ng-if='doctors.length > 0' style="margin-top: 250px;">
+		<div class="media well well-fuild col-lg-6 col-lg-offset-3 col-md-6 col-sm-12" ng-repeat="doctor in doctors" style="width: 100%; ">
+			<h1>{{doctor.name}}</h1>
+			<p>{{doctor.distance}}</p>
+			<small>
+			   <a
+               ng-href='https://maps.google.com/maps?q={{doctor.location[0]}},{{doctor.location[1]}}&hl=es;z=14&amp;output=embed' style="color:#0000FF; text-align:left" target="_blank">open doctor location
+               </a>
+            </small>
+		</div>
+	</div>
+
+	<div ng-if='render' style="margin-top: 250px;">
+		<div class="media well well-fuild col-lg-6 col-lg-offset-3 col-md-6 col-sm-12" ng-repeat="hospital in hospitals" style="width: 100%; ">
+			<h1>{{hospital.name}}</h1>
+			 <a href={{hospital.photos[0].html_attributions[0].split('"')[1]}}>open location</a>
+		</div>
 	</div>
 </div>
 
